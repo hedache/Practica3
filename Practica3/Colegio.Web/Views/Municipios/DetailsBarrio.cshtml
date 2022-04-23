@@ -1,0 +1,288 @@
+﻿@model Colegio.Web.Models.Barrio
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.css" />
+<link rel="stylesheet" href="~/lib/Font-Awesome/css/regular.min.css">
+<link rel="stylesheet" href="~/lib/Font-Awesome/css/solid.min.css">
+@*<h2>Details</h2>*@
+<div>
+    <h4>Detalle barrio</h4>
+    <hr />
+    @*    <dl class="dl-horizontal">
+        <dt>
+        @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+        @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+        @Html.DisplayNameFor(model => model.CantidadAlumnos)
+        </dt>
+        <dd>
+        @Html.DisplayFor(model => model.CantidadAlumnos)
+        </dd>
+        </dl>
+        </div>*@
+    <div class="list-group">
+        <button type="button" class="list-group-item list-group-item-action active">
+            @*@Html.DisplayNameFor(model => model.Name)*@
+            Nombre
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">@Html.DisplayFor(model => model.Name)</button>
+        <button type="button" class="list-group-item list-group-item-action active">
+            @Html.DisplayNameFor(model => model.CantidadAlumnos)
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">@Html.DisplayFor(model => model.CantidadAlumnos)</button>
+    </div>
+    <div>
+        <br />
+        <a asp-action="Details" asp-route-id="@Model.IdMunicipio" class="btn btn-outline-dark">
+            <span class="material-symbols-outlined">
+                keyboard_backspace
+            </span>Atrás
+        </a>
+        <br />
+        <br />
+        <a asp-action="AddAlumno" asp-route-id="@Model.Id" class="btn btn-outline-primary">
+            <span class="material-symbols-outlined">
+                add
+            </span> Alumno
+        </a>
+        <br />
+
+    </div>
+    <br />
+
+    <h4 class="panel-title">Listado de alumnos</h4>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model =>
+                        model.Barrios.FirstOrDefault().Name)*@
+                    Nombre
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model =>
+                        model.Alumnos.FirstOrDefault().LastName)*@
+                    Apellido
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model =>
+                        model.Alumnos.FirstOrDefault().LastName)*@
+                    DNI
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model =>
+                        model.Alumnos.FirstOrDefault().LastName)*@
+                    Direecion
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model =>
+                        model.Alumnos.FirstOrDefault().LastName)*@
+                    Telefono
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model =>
+                        model.Alumnos.FirstOrDefault().LastName)*@
+                    Correo
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model =>
+                        model.Alumnos.FirstOrDefault().LastName)*@
+                    Grado
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model =>
+                        model.Alumnos.FirstOrDefault().LastName)*@
+                    Edad
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Alumnos)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DNI)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Direecion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefono)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Correo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Grado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Edad)
+                    </td>
+                    <td>
+                        <a asp-action="EditAlumno" asp-route-id="@item.Id" class="btn btn-warning">
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </a>
+                        <button data-id="@item.Id" class="btn btn-danger
+deleteItem" data-toggle="modal" data-target="#deleteDialog" onclick="ver(@item.Id)">
+                            <span class="material-symbols-outlined">
+                                delete
+                            </span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*<div class="row">
+        <div class="col-md-12">
+        <div class="panel panel-default">
+        <div class="panel-heading">
+        <h4 class="panel-title">Listado de ciudades</h4>
+        </div>
+        <div class="panel-body">
+        <table class="table table-hover table-responsive table-striped" id="MyTable">
+        <thead>
+        <tr>
+        <th>
+        @Html.DisplayNameFor(model =>
+        model.Alumnos.FirstOrDefault().Name)
+        </th>
+        <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Alumnos)
+        {
+        <tr>
+        <td>
+        @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+        <a asp-action="EditAlumno" asp-route-id="@item.Id" class="btn btn-warning">
+        <span class="material-symbols-outlined">
+        edit
+        </span>
+        </a>
+        <button data-id="@item.Id" class="btn btn-danger
+        deleteItem" data-toggle="modal" data-target="#deleteDialog" onclick="ver(@item.Id)">
+        <span class="material-symbols-outlined">
+        delete
+        </span>
+        </button>
+        </td>
+        </tr>
+        }
+        </tbody>
+        </table>
+        </div>
+        </div>
+        </div>
+        </div>*@
+    <partial name="_DeleteDialog" />
+
+    <div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" arialabelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<h5 class="modal-title" id="exampleModalLabel">Borrado de registro</h5>*@
+                    <span class="material-symbols-outlined">
+                        warning
+                    </span>
+                </div>
+                <div class="modal-body">
+
+                    <p>¿Está seguro que desea eliminar el registro?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-danger" id="btnYesDelete" onclick="outterFunction()">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteDialog2" tabindex="-1" role="dialog" arialabelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Borrando</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+            let valorModal;
+            function ver(valor){
+                $('#deleteDialog').modal('show');
+                valorModal = valor
+            }
+            function outterFunction() {
+                $('#deleteDialog').modal('hide');
+                $('#deleteDialog2').modal('show');
+                var myBookId = $(this).data('id');
+                setTimeout(function(){
+                window.location.href='/Countries/Delete/'+valorModal;
+                }, 3000);
+        }
+
+    </script>
+
+
+    @section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="/js/deleteDialog.js"></script>
+    <script type="text/javascript">
+         $(document).ready(function () {
+         $('#MyTable').DataTable();
+         // Delete item
+         sc_deleteDialog.openModal('deleteItem', true, 'btnYesDelete',
+        '/Municipios/DeleteAlumno/', false);
+         });
+    </script>
+    }

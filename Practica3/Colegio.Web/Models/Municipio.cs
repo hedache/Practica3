@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Colegio.Web.Models
 {
@@ -8,5 +10,9 @@ namespace Colegio.Web.Models
         [MaxLength(50, ErrorMessage = "El campo {0} debe contener al menos un caracter")]
         [Required]
         public string Name { get; set; }
+
+        public ICollection<Barrio> Barrios { get; set; }
+        [DisplayName("Cantidad de barrios")]
+        public int CantidadBarrios => Barrios == null ? 0 : Barrios.Count;
     }
 }

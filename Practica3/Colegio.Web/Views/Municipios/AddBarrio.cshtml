@@ -1,0 +1,33 @@
+﻿@model Colegio.Web.Models.Barrio
+@{
+    ViewData["Title"] = "Add Department";
+}
+<link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+
+<h2>Creación</h2>
+<h4>Barrio</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddBarrio">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdMunicipio" />
+            <partial name="_Barrio" />
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+                <br />
+                <br />
+                <a asp-action="Details" asp-route-id="@Model.IdMunicipio" class="btn btn-outline-dark"><span class="material-symbols-outlined">
+keyboard_backspace
+</span>Atrás</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+ @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
+

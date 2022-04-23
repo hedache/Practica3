@@ -31,7 +31,7 @@ namespace Colegio.Web
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            //services.AddTransient<SeedDb>();
+            services.AddTransient<SeedDb>();
 
             services.AddControllersWithViews();
             //services.AddControllersWithViews();
